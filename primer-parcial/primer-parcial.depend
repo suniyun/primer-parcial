@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1538490673 source:c:\users\alumno\desktop\desktop\primer-parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	"movies.h"
+
+1538490860 c:\users\alumno\desktop\desktop\primer-parcial\movies.h
+
+1538486593 c:\users\alumno\desktop\desktop\primer-parcial\library.h
+
+1538490657 source:c:\users\alumno\desktop\desktop\primer-parcial\movies.c
+	<stdio.h>
+	<stdlib.h>
+	"movies.h"
+	<string.h>
+
