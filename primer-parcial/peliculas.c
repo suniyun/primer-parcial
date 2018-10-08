@@ -25,19 +25,19 @@ int sPelicula_cargarIndice(Pelicula* pPelicula,int indice,int limite)
     int auxAnio;
 
     printf("Titulo:\n");
-    if(getString(auxTitulo,32)==0)
+    if(sPelicula_getString(auxTitulo,32)==0)
     {
 
                 printf("Nacionalidad: \n");
-                if(getString(auxNacionalidad,128)==0)
+                if(sPelicula_getString(auxNacionalidad,128)==0)
                 {
-                    if(getEntero(&auxAnio,2,"Anio: \n", "\nError\n",4,0) == 0)
+                    if(sPelicula_getEntero(&auxAnio,2,"Anio: \n", "\nError\n",4,0) == 0)
                     {
                                 strncpy(pPelicula[indice].titulo,auxTitulo,32);
                                 strncpy(pEmpleados[indice].nacionalidad,auxNacionalidad,128);
-                                pEmpleados[indice].anio = auxAnio;
-                                pEmpleados[indice].isEmpty = 0;
-                                pEmpleados[indice].ID = generarID();
+                                pPelicula[indice].anio = auxAnio;
+                                pPelicula[indice].isEmpty = 0;
+                                pPelicula[indice].ID = generarID();
 
                     }
                 }
@@ -69,7 +69,7 @@ int sPelicula_modificarID(Pelicula* pPelicula, int indice, int limite)
     int id;
     int opciones;
     int salir=0;
-    id = buscarPantallaPorID(pPelicula,limite,indice);
+    id = sPelicula_buscarPantallaPorID(pPelicula,limite,indice);
     if(id >= 0)
     {
         if(pPelicula != NULL && limite >0)
@@ -78,7 +78,7 @@ int sPelicula_modificarID(Pelicula* pPelicula, int indice, int limite)
             {
                 system("cls");
                 fflush(stdin);
-                getEntero(&opciones,4,"1)Modificar titulo:\n2)Modificar nacionalidad:\n3)Modificar anio:\n)-Salir\n","\nError\n",6,0);
+                getEntero(&opciones,4,"1)Modificar titulo:\n2)Modificar nacionalidad:\n3)Modificar anio:\n4)Salir\n","\nError\n",6,0);
                 switch(opciones)
                 {
                         case 1:
@@ -98,7 +98,7 @@ int sPelicula_modificarID(Pelicula* pPelicula, int indice, int limite)
                         case 3:
                             if(getEntero(&auxAnio,2,"Nuevo Anio: \n", "\nError\n",4,0) == 0)
                             {
-                                pPeliculaindice].anio = auxAnio;
+                                pPelicula[indice].anio = auxAnio;
                             }
                             break;
                         case 4:
@@ -164,16 +164,16 @@ int sPelicula_getEntero(int* pNum,int reint,char* msg,char* msgError,int maximo,
                 break;
 
             }else
+                {
+                    printf(msgError);
+                }
+
+        }else
             {
                 printf(msgError);
             }
-
-
-        }else
-        {
-            printf(msgError);
-        }
     }
+}
 
 
     return retorno;
@@ -185,7 +185,7 @@ static int getInt(int* pResultado)
     char bufferString[4096];
     if(pResultado != NULL)
     {
-        if(getString(bufferString,4096) == 0 && isInt(bufferString)==0)
+        if(sPelicula_getString(bufferString,4096) == 0 && isInt(bufferString)==0)
         {
 
             *pResultado=atof(bufferString);

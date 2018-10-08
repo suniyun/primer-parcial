@@ -18,7 +18,7 @@ int main()
     {
         system("cls");
         fflush(stdin);
-        if(chequearIndice(pelicula,CANT_PELICULAS) == -1)
+        if(sPelicula_chequearIndice(pelicula,CANT_PELICULAS) == -1)
         {
             bandera = 1;
         }
@@ -43,7 +43,7 @@ int main()
                 case 2:
                     if(bandera == 1)
                     {
-                        if(getEntero(&id,2,"\nIngrese el ID a modificar: ", "Error", CANT_PELICULAS, -1) == 0)
+                        if(sPelicula_getEntero(&id,2,"\nIngrese el ID a modificar: ", "Error", CANT_PELICULAS, -1) == 0)
                         {
                             if(id >=0)
                             {
@@ -64,7 +64,7 @@ int main()
                 case 3:
                     if(bandera == 1)
                     {
-                        if(getEntero(&id,2,"\nIngrese el ID para borrar: ", "Error", CANT_PELICULAS, -1) == 0)
+                        if(sPelicula_getEntero(&id,2,"\nIngrese el ID para borrar: ", "Error", CANT_PELICULAS, -1) == 0)
                         {
                             if(id >=0)
                             {
@@ -85,7 +85,7 @@ int main()
                 case 4:
                     if(bandera == 1)
                     {
-                        sPeliculas_mostrarPeliculaOrdenados(pelicula, CANT_PELICULAS);
+                        sPeliculas_mostrarPeliculaOrdenadas(pelicula, CANT_PELICULAS);
                     }
                     else
                     {

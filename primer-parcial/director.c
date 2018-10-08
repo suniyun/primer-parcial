@@ -34,19 +34,20 @@ int sDirector_cargarIndice(Director* pDirector,int indice,int limite)
                 {
                     if(getEntero(&auxAnio,2,"Anio: \n", "\nError\n",4,0) == 0)
                     {
-                                strncpy(pPelicula[indice].titulo,auxTitulo,32);
-                                strncpy(pEmpleados[indice].nacionalidad,auxNacionalidad,128);
-                                pEmpleados[indice].anio = auxAnio;
-                                pEmpleados[indice].isEmpty = 0;
-                                pEmpleados[indice].ID = generarID();
-
+                        if(getEntero(&auxAnio,2,"Anio: \n", "\nError\n",4,0) == 0)
+                        {
+                                strncpy(pDirector[indice].nombre,auxNombre,32);
+                                strncpy(pDirector[indice].nacionalidad,auxNacionalidad,128);
+                                pDirector[indice].anio = auxAnio;
+                                pDirector[indice].edad = auxEdad;
+                                pDirector[indice].isEmpty = 0;
+                                pDirector[indice].ID = generarID();
+                        }
                     }
                 }
-
     }
     return 0;
 }
-
 int sDirector_borrarPantallaPorID(Director* pDirector, int id, int limite)
 {
     int retorno = -1;
