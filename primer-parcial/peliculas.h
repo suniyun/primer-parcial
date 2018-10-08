@@ -13,7 +13,7 @@ int isEmpty;
 
 /**
     cargarDatosVacio: Carga un valor en el mismo campo de todas las posiciones del array recibido.
-    \param pEmpleado: Guarda el array recibido.
+    \param pPelicula: Guarda el array recibido.
     \param limite: Guarda el int del limite del array.
     \return return 0 OK, -1 Error.
 */
@@ -29,7 +29,7 @@ int sPelicula_cargarDatosVacio(Pelicula* pPelicula, int limite);
 int sPelicula_cargarIndice(Pelicula* pPelicula,int indice,int limite);
 
 /** \brief  buscarPantallaPorID: Recibe un ID para buscar una pelicula.
- * \param   pEmpleado: Guarda el array recibido.
+ * \param   pPelicula: Guarda el array recibido.
  * \param   limite: Guarda el int del limite del array.
  * \param   id: Guarda el int de la pelicula a buscar.
  * \return  return el indice del array donde esta la pelicula
