@@ -11,4 +11,6 @@ int isEmpty;
 
 #endif // DIRECTOR_H_INCLUDE
 
-int borrarPantallaPorID(Director* pDirector, int id, int limite);
+int sDirector_cargarDatosVacio(Director* pDirector, int limite);
+int sDirector_cargarIndice(Director* pDirector,int indice,int limite);
+int sDirector_borrarPantallaPorID(Director* pDirector, int id, int limite);

@@ -4,16 +4,21 @@
 #include "peliculas.h"
 #include "director.h"
 
-static int generarID(void);
+static int sPelicula_generarID(void);
+static int getInt(int* pResultado);
+static int isInt(char* pBuffer);
 
-/**
-    cargarIndice: carga valores en la posicion del array recibido.
-    \param pPelicula: Guarda el array recibido.
-    \param indice: Guarda el int de la posicion del array.
-    \param limite: Guarda el int del limite del array.
-    \return return 0 OK, -1 Error.
-*/
-int cargarIndice(Pelicula* pPelicula,int indice,int limite)
+int sPelicula_cargarDatosVacio(Pelicula* pPelicula, int limite)
+{
+    int i;
+    for(i=0;i<limite;i++)
+    {
+        pPelicula[i].isEmpty=-1;
+    }
+    return 0;
+}
+
+int sPelicula_cargarIndice(Pelicula* pPelicula,int indice,int limite)
 {
     char auxTitulo[32];
     char auxNacionalidad[32];
@@ -41,15 +46,7 @@ int cargarIndice(Pelicula* pPelicula,int indice,int limite)
     return 0;
 }
 
-/** \brief  buscarPantallaPorID: Recibe un ID para buscar una pelicula.
- * \param   pEmpleado: Guarda el array recibido.
- * \param   limite: Guarda el int del limite del array.
- * \param   id: Guarda el int de la pelicula a buscar.
- * \return  return el indice del array donde esta la pelicula
- *
- */
-
-int buscarPantallaPorID(Pelicula* pPelicula, int limite, int id)
+int sPelicula_buscarPantallaPorID(Pelicula* pPelicula, int limite, int id)
 {
     int i;
     int retorno = -1;
@@ -64,14 +61,7 @@ int buscarPantallaPorID(Pelicula* pPelicula, int limite, int id)
     return retorno;
 }
 
-/**    modificarID: Recibe un ID para modificar una posicion del array.
-    \param pPelicula: Guarda el array recibido.
-    \param id: Guarda el int recibido del ID a modificar.
-    \param limite: Guarda el int del limite del array.
-    \return return 0 OK, -1 Error.
-*/
-
-int modificarID(Pelicula* pPelicula, int indice, int limite)
+int sPelicula_modificarID(Pelicula* pPelicula, int indice, int limite)
 {
     char auxTitulo[51];
     char auxNacionalidad[51];
@@ -120,15 +110,7 @@ int modificarID(Pelicula* pPelicula, int indice, int limite)
     return 0;
 }
 
-/**
-    borrarPantallaPorID: Recibe un ID para borrar una pelicula.
-    \param pPelicula: Guarda el array recibido.
-    \param limite: Guarda el int del limite del array.
-    \param id: Guarda el int del pelicula a borrar.
-    \return return 0 OK, -1 Error.
-*/
-
-int borrarPantallaPorID(Pelicula* pPelicula, int id, int limite)
+int sPelicula_borrarPantallaPorID(Pelicula* pPelicula, int id, int limite)
 {
     int retorno = -1;
     int i;
@@ -150,8 +132,82 @@ int borrarPantallaPorID(Pelicula* pPelicula, int id, int limite)
     \return return cont + 1.
 */
 
-static int generarID(void)
+static int sPelicula_generarID(void)
 {
     static int cont = -1;
     return ++cont;
+}
+
+int sPelicula_getString(char* pBufferString,int limite)
+{
+    fflush(stdin);
+    fgets(pBufferString,limite,stdin);
+    if(pBufferString[strlen(pBufferString)-1]=='\n')
+    {
+        pBufferString[strlen(pBufferString)-1]='\0';
+    }
+    return 0;
+}
+int sPelicula_getEntero(int* pNum,int reint,char* msg,char* msgError,int maximo,int minimo)
+{
+    int auxiliarNum;
+    int retorno = -1;
+    for(;reint>0;reint--)
+    {
+        printf(msg);
+        if(getInt(&auxiliarNum) == 0)
+        {
+            if(auxiliarNum > minimo && auxiliarNum < maximo)
+            {
+                *pNum = auxiliarNum;
+                retorno = 0;
+                break;
+
+            }else
+            {
+                printf(msgError);
+            }
+
+
+        }else
+        {
+            printf(msgError);
+        }
+    }
+
+
+    return retorno;
+}
+
+static int getInt(int* pResultado)
+{
+    int retorno=-1;
+    char bufferString[4096];
+    if(pResultado != NULL)
+    {
+        if(getString(bufferString,4096) == 0 && isInt(bufferString)==0)
+        {
+
+            *pResultado=atof(bufferString);
+            retorno=0;
+
+        }
+    }
+    return retorno;
+}
+
+static int isInt(char* pBuffer)
+{
+    int i=0;
+    int retorno=0;
+    while(pBuffer[i] != '\0')
+    {
+        if(pBuffer[i] < '0' || pBuffer[i] > '9')
+        {
+            retorno=-1;
+            break;
+        }
+        i++;
+    }
+    return retorno;
 }

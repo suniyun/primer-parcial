@@ -13,7 +13,7 @@ int main()
     int indiceVacio;
     int bandera=0;
     int salir=0;
-    cargarDatosVacio(pelicula,CANT_PELICULAS);
+    sPelicula_cargarDatosVacio(pelicula,CANT_PELICULAS);
     do
     {
         system("cls");
@@ -26,13 +26,13 @@ int main()
         {
             bandera = 0;
         }
-        getEntero(&opcion,3,"1)Cargar peliculas:\n2)Modificar informacion de la pelicula:\n3)Baja de peliculas\n4)Mostrar lista de peliculas ordenada\n5)Salir\n","\nError\n",6,0);
+        sPelicula_getEntero(&opcion,3,"1)Cargar peliculas:\n2)Modificar informacion de la pelicula:\n3)Baja de peliculas\n4)Mostrar lista de peliculas ordenada\n5)Salir\n","\nError\n",6,0);
         switch(opcion)
         {
                 case 1:
                     if(indicesVacios(pelicula,CANT_PELICULAS,&indiceVacio)==0)
                     {
-                        cargarIndice(pelicula,indiceVacio,CANT_PELICULAS);
+                        sPelicula_cargarIndice(pelicula,indiceVacio,CANT_PELICULAS);
                         break;
                     }
                     else
@@ -47,7 +47,7 @@ int main()
                         {
                             if(id >=0)
                             {
-                                modificarID(pelicula,id,CANT_PELICULAS);
+                                sPelicula_modificarID(pelicula,id,CANT_PELICULAS);
                             }
                             else
                             {
@@ -64,11 +64,11 @@ int main()
                 case 3:
                     if(bandera == 1)
                     {
-                        if(getEntero(&id,2,"\nIngrese el ID para borrar: ", "Error", CANT_EMPLEADOS, -1) == 0)
+                        if(getEntero(&id,2,"\nIngrese el ID para borrar: ", "Error", CANT_PELICULAS, -1) == 0)
                         {
                             if(id >=0)
                             {
-                                borrarPantallaPorID(empleados, id,CANT_EMPLEADOS);
+                                sPelicula_borrarPantallaPorID(pelicula, id,CANT_PELICULAS);
                             }
                             else
                             {
@@ -85,7 +85,7 @@ int main()
                 case 4:
                     if(bandera == 1)
                     {
-                        mostrarEmpleadosOrdenados(empleados, CANT_EMPLEADOS);
+                        sPeliculas_mostrarPeliculaOrdenados(pelicula, CANT_PELICULAS);
                     }
                     else
                     {
@@ -93,18 +93,8 @@ int main()
                     }
                     system("pause");
                     break;
+
                 case 5:
-                    if(bandera == 1)
-                    {
-                        calcularTotalPromedioSalarios(empleados, CANT_EMPLEADOS);
-                    }
-                    else
-                    {
-                        printf("\nNo hay datos cargados\n");
-                    }
-                    system("pause");
-                    break;
-                case 6:
                 salir = 1;
         }
     }while(salir==0);
